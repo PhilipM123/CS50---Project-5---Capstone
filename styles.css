@@ -1,0 +1,84 @@
+h1{
+    font-family: Times,serif;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.newlist-form-div{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid #ffffff ;
+    border-radius: 20px;
+    max-width: 600px;
+    min-width: 350px;
+    font-family: Times,serif;
+    font-weight: bolder;
+    background-color: rgb(224, 224, 224);
+}
+
+.list{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid #ffffff ;
+    border-radius: 20px;
+    max-width: 600px;
+    min-width: 350px;
+    font-family: Times,serif;
+    font-weight: bolder;
+    background-color: rgb(224, 224, 224);
+}
+
+.listitem{
+    margin-left: 10%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-family: Times,serif;
+}
+
+.newlist-form-item{
+    margin-left: 10%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-family: Times,serif;
+}
+
+.flex-container{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.category{
+    margin: 10px;
+    border-radius:0.12em;
+    font-family: serif;
+    text-transform: uppercase;
+    border-color: white;
+    border-radius: 5px;
+    height: 50px;
+    width: 200px;
+}
+.category:hover{
+    background-color:#DDDDDD;
+    transition: 0.7s;
+}
+.paginator{
+    margin-left: 50%;
+    transform: translateX(0%);
+}
+.delete-form-item{
+    margin-left: 80%;
+    transform: translateY(-100%);
+}
+.listActionItem{
+    list-style-type: none;
+}
+.checkboxComplete{
+    margin-left: -7%;
+}
+.listActionItemNonEditable{
+    margin-left: -5%;
+}

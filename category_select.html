@@ -1,0 +1,19 @@
+{% extends "listsapp/layout.html" %}
+
+{% block body %}
+
+<h1>Categories</h1>
+
+
+
+<div class="flex-container">
+    {% for title in array %}
+    <form class="categoryForm" method="POST" action="{% url 'category_individual' title %}">
+        {% csrf_token %}
+        <input class="category" name="catTitle" type="submit" value="{{title}}">
+    </form>
+    {%endfor%}
+</div>
+
+
+{% endblock %}

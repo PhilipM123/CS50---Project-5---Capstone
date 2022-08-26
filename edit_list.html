@@ -1,0 +1,37 @@
+{% extends "listsapp/layout.html" %}
+
+{% block body %}
+
+<h1>{{list.title}}</h1>
+
+{% if user.is_authenticated %}
+<div id="new-list-item" class="newlist-form-div">
+  <h3 class="newlist-form-item">Create List Item</h3>
+    <form id="newItem" class="newlist-form-item" method="POST">
+      {% csrf_token %}
+        <input name="content" />
+        <input type="submit" value="Create" />
+    </form>
+    <ul class="listItems">
+      <input type="hidden" name="id" value="{{list.id}}">
+      {% for listitem in list.listitems.all %}
+      <li class="divParentListItem">
+        <p class="divTextListItem">{{listitem.content}}</p>
+        <form name="deleteItem" class="delete-form-item" method="POST">
+          {% csrf_token %}
+            <input type="submit" value="Delete Item" />
+            <input type="hidden", name="listItemId" value="{{listitem.id}}">
+        </form>
+      </li>
+      <br>
+      {% endfor %}
+    </ul>
+    <form class="newlist-form-item" action="{% url 'index' %}">
+      <input type="submit" value="Submit List">
+    </form>
+
+</div>
+    
+{%endif%}
+
+{% endblock %}

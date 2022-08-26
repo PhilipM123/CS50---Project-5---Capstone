@@ -1,0 +1,92 @@
+{% extends "listsapp/layout.html" %}
+
+{% block body %}
+
+<h1>All Lists</h1>
+
+{% if user.is_authenticated %}
+<div class="newlist-form-div">
+    <form method="POST" id="newlist-form" action="{% url 'create_list' %}">
+        {% csrf_token %}
+        <h3 class="newlist-form-item" >Create a New List</h3>
+        <br>
+        <label for="title" class="newlist-form-item" >Title: </label>
+        <input type="text" name="title">
+        <br>
+        <label for="categories" class="newlist-form-item">Category: </label>
+        <select name="category" id="categories">
+            <option value="Groceries">Groceries</option>
+            <option value="todo">To Do</option>
+            <option value="movies">Movies</option>
+            <option value="music">Music</option>
+            <option value="Videogames">Videogames</option>
+            <option value="team">Team</option>
+            <option value="restaurants">Restaurants</option>
+            <option value="books">Books</option>
+        </select>
+        <label for="privacy" style="margin-left: 10px;" >Public List?:</label>
+        <select name="public" id="privacy" >
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <input type="submit" value="Save List" style="margin-left: 10px; background-color: rgb(206, 216, 221); border-color: rgb(224, 224, 224);">
+    </form>
+</div>
+
+
+{% for list in list %}
+    {% if list.public == True or request.user.username in list.creator.username %}
+        <div class="list">
+            <h3 class="listitem">{{list.title}}</h3>
+            <p class="listitem">User: <a href="{% url 'profile' list.creator.id %}">{{list.creator.username}}</a></p>
+            <h6 class="listitem">Date Created: {{list.timestamp}}</h6>
+            <ul class="listitem">
+                {% for listitem in list.listitems.all %}
+                    {% if request.user.is_authenticated and request.user.username in list.creator.username %}
+                    <li class="listActionItem"><form method="PUT">{% csrf_token %}
+                        <input type="checkbox" name="checkboxComplete" class="checkboxComplete">        {{listitem.content}}
+                        <input type="hidden" value="{{listitem.id}}" name="completeListItemId">
+                    </form></li>
+                    {%else%}
+                    <li class="listActionItemNonEditable">{{listitem.content}}</li>
+                    {%endif%}
+                {%endfor%}
+            </ul>
+            {% if request.user.is_authenticated and request.user.username in list.creator.username %}
+                <form name="deleteListForm" method="POST" class="listitem">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete List" />
+                    <input type="hidden" value="{{list.id}}" name="deleteListId">
+                </form>
+                <form name="editListForm" method="POST" action="{% url 'edit_list' list.id %}" class="listitem">
+                    {% csrf_token %}
+                    <input type="submit" value="Edit List" />
+                </form>
+            {%endif%}
+            {% if request.user.is_authenticated and request.user.username not in list.creator.username %}
+                <form name="followListForm" method="POST" class="listitem">
+                    {% csrf_token %}
+                    <input type="submit" value="Follow List" name="followBtn" />
+                    <input type="hidden" value="{{list.id}}" name="followListId">
+                </form>
+            {%endif%}
+        </div>
+    {% endif %}
+{%endfor%}
+
+<nav class="paginator" style="text-align: center;">
+    <ul class="pagination">
+        {% if list.has_next %}
+            <li class="page_item"><a href="?page={{ list.next_page_number }}">next</a></li>
+        {%endif%}
+        {% if list.has_previous %}
+            <li class="page_item"><a href="?page=1">&laquo; first   /   </a></li>
+            <li class="page_item"><a href="?page={{ list.previous_page_number }}">   previous</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+    
+{%endif%}
+
+{% endblock %}
