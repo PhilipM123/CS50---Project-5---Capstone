@@ -9,7 +9,29 @@ Features of this app include:
 - Editing lists
 - Marking list items as complete
 
-Thank you for reviewing my final project! I'm very excited to present this and I hope you are impressed!
+Distinctiveness and Complexity:
+This project contains multiple aspects across all the different projects of this course aswell as some extra. Features such as creating and editing lists, pagination and following other users lists were inspired from the other projects. Additional features which I think add another level of complexity include:
+- List Items which are separate models that are attributed to each List, the List Items can be added or removed from Lists in the 'Edit List' page. Each List has multiple ListItem models associated to it. Adding or removing List Items is done using Javascript and so no page refresh is required to see the changes.
+- The 'Category' page which only displays Categories where users have created lists, if a category does not contain any lists then it is not available to select on this page. 
+- Marking List Items as complete. Users can mark List-Items as complete by clicking a chekcbox next to each List Item. This Strikes through the text of the List Item and moves the List Item to the bottom of the list using Javascript without requiring a page refresh. User's can un-check the 'completed' box and this marks the List Item as active again, removing the strikethough and un-checking the 'completed' box.
+
+Contents of important files:
+- Views.py: This contains the Python code that allows users to create and edit the different models in the project, navigate between pages, and perform some important functions for the site.
+- urls.py: Allows the user to navigate to different parts of the site and access different functions.
+- models.py: contains the different models used in the app.
+- HTML documents include: 'category_individual', 'category_select', 'edit_list', 'follow_view', 'index', 'layout', 'login', 'profile', 'register'. These HTML files are in the 'templates' folder.
+- static Folder: this folder contains index.js and styles.css. Index.js is important for running much of this app as I tried to use Javascript where possible. 
+
+Running the application:
+The 'lists' folder should contain a folder called 'listsapp' and the manage.py file.
+The views.py, urls.py, models.py files should be located under 'lists' -> 'listsapp'
+In the same directory, the folders _pycache_, migrations, static & templates should also be located.
+Inside the 'templates' folder should be another folder called 'listsapp' which contains all the html documents.
+Inside the 'static' folder should be another folder called 'listsapp' which contains index.js and styles.css.
+To launch the application, users can cd to the 'lists' directory containing the manage.py file. The user can then run 'py manage.py runserver'.
+
+
+Here is an overall description of the app:
 
 The first feature is the ability to create lists. Lists have a title, a category which is selected from a drop-down, and can be private or public.
 Lists contain 'list-items' which can be added/removed/edited aswell as marked as complete.
